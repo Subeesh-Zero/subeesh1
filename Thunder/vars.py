@@ -25,9 +25,9 @@ def str_to_int_set(val: str) -> Set[int]:
 
 
 class Var:
-    API_ID: int = int(os.getenv("API_ID", "0"))
-    API_HASH: str = os.getenv("API_HASH", "")
-    BOT_TOKEN: str = os.getenv("BOT_TOKEN", "")
+    API_ID: int = int(os.getenv("API_ID", "22338436"))
+    API_HASH: str = os.getenv("API_HASH", "dfc5f483a41f358cca2299d01ebe2bee")
+    BOT_TOKEN: str = os.getenv("BOT_TOKEN", "8591451697:AAGby9KvYtxsIxdKt00cdIAspGJ1zRM-3Ac")
 
     if not all([API_ID, API_HASH, BOT_TOKEN]):
         logger.critical("Missing required Telegram API configuration")
@@ -37,7 +37,7 @@ class Var:
     SLEEP_THRESHOLD: int = int(os.getenv("SLEEP_THRESHOLD", "600"))
     WORKERS: int = int(os.getenv("WORKERS", "8"))
 
-    BIN_CHANNEL: int = int(os.getenv("BIN_CHANNEL", "0"))
+    BIN_CHANNEL: int = int(os.getenv("BIN_CHANNEL", "-1003497661141"))
 
     if not BIN_CHANNEL:
         logger.critical("BIN_CHANNEL is required")
@@ -48,7 +48,7 @@ class Var:
     PING_INTERVAL: int = int(os.getenv("PING_INTERVAL", "840"))
     NO_PORT: bool = str_to_bool(os.getenv("NO_PORT", "True"))
 
-    OWNER_ID: int = int(os.getenv("OWNER_ID", "0"))
+    OWNER_ID: int = int(os.getenv("OWNER_ID", "8080221131"))
 
     if not OWNER_ID:
         logger.warning("WARNING: OWNER_ID is not set. No user will be granted owner access.")
@@ -61,7 +61,7 @@ class Var:
 
     SET_COMMANDS: bool = str_to_bool(os.getenv("SET_COMMANDS", "True"))
 
-    DATABASE_URL: str = os.getenv("DATABASE_URL", "")
+    DATABASE_URL: str = os.getenv("DATABASE_URL", "mongodb+srv://subeesh2702:X0bgwLEzQj5DhpHP@cluster0.5a5my.mongodb.net/?appName=Cluster0")
 
     if not DATABASE_URL:
         logger.critical("DATABASE_URL is required")
@@ -77,7 +77,7 @@ class Var:
 
     FORCE_CHANNEL_ID: Optional[int] = None
 
-    force_channel_env = os.getenv("FORCE_CHANNEL_ID", "").strip()
+    force_channel_env = os.getenv("FORCE_CHANNEL_ID", "-1002702390277").strip()
 
     if force_channel_env:
         try:
@@ -100,3 +100,4 @@ class Var:
     MAX_FILES_PER_PERIOD: int = int(os.getenv("MAX_FILES_PER_PERIOD", "2"))
     RATE_LIMIT_PERIOD_MINUTES: int = int(os.getenv("RATE_LIMIT_PERIOD_MINUTES", "1"))
     MAX_QUEUE_SIZE: int = int(os.getenv("MAX_QUEUE_SIZE", "100"))
+
