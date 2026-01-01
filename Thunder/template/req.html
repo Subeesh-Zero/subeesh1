@@ -5,40 +5,232 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ heading }}</title>
 
-    <!-- Social Meta Tags -->
     <meta name="description" content="Easily share and distribute files">
     <meta property="og:title" content="Thunder FileToLink">
     <meta property="og:description" content="File Streamer">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/live.png">
     
-    <!-- Configuration -->
-    <meta name="theme-color" content="#1a1a2e">
-    <meta name="msapplication-navbutton-color" content="#1a1a2e">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#1a1a2e">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="msapplication-navbutton-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#0f172a">
     <meta name="color-scheme" content="dark light">
     <meta name="application-name" content="Thunder FileToLink">
     
-    <!-- Icons -->
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/Thunder.jpg">
     <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/Thunder.jpg">
 
-    <!-- External Resources -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
 
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/style.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent),
+                              radial-gradient(circle at bottom left, rgba(79, 70, 229, 0.1), transparent);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* Modern Header Style */
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        #file-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            word-break: break-all;
+            line-height: 1.4;
+        }
+
+        /* Professional Video Player Container */
+        .player-container {
+            border-radius: 20px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glass-border);
+            margin-bottom: 2rem;
+            animation: scaleIn 0.6s ease;
+        }
+
+        .plyr {
+            --plyr-color-main: var(--primary);
+            border-radius: 16px;
+        }
+
+        /* Modern Control Buttons */
+        .controls-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .action-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: var(--card-bg);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .action-button:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+        }
+
+        .action-button i {
+            font-size: 1.1rem;
+        }
+
+        /* Dropdown & Grid Improvements */
+        .dropdown-menu {
+            background: #1e293b;
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+        }
+
+        .player-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 1rem;
+            padding: 1rem 0;
+        }
+
+        .player-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.75rem;
+            border-radius: 12px;
+            border: 1px solid transparent;
+            transition: var(--transition);
+        }
+
+        .player-card:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary);
+        }
+
+        .player-icon {
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .player-card:hover .player-icon {
+            transform: scale(1.1);
+        }
+
+        .player-name {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-dim);
+        }
+
+        /* Footer Style */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            border-top: 1px solid var(--glass-border);
+        }
+
+        #thunder-text {
+            color: #fbbf24;
+            font-weight: 700;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Mobile Responsive Adjustments */
+        @media (max-width: 640px) {
+            .container { padding: 1rem; }
+            #file-name { font-size: 1.2rem; }
+            .controls-section { grid-template-columns: 1fr; }
+            .action-button { width: 100%; }
+        }
+
+        /* Keep existing theme toggle style but cleaner */
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 100;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 1px solid var(--glass-border);
+            background: var(--card-bg);
+            color: white;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+    </style>
 </head>
 <body>
     <button class="theme-toggle button-base" aria-label="Toggle Light/Dark Mode" aria-pressed="false" title="Toggle Light/Dark Mode">
         <i class="fas fa-moon" aria-hidden="true"></i>
     </button>
-
-    <div class="background-animation" aria-hidden="true">
-        <div class="bg-gradient"></div>
-    </div>
 
     <div class="container">
         <header class="header">
@@ -59,76 +251,54 @@
             <nav class="controls-section" aria-label="File options">
                 <div class="dropdown-container" id="stream-dropdown-container">
                     <button type="button" class="action-button button-base secondary-button stream-btn" aria-haspopup="true" aria-expanded="false" aria-controls="stream-menu" id="stream-btn-label">
-                        <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                        <i class="fas fa-play-circle" aria-hidden="true"></i>
                         <span>Stream</span>
                     </button>
                     <div class="dropdown-menu" id="stream-menu" aria-labelledby="stream-btn-label" role="menu">
                         <div class="stream-menu-header">
-                            <h3>Open with external player</h3>
-                            <button type="button" aria-label="Close menu" class="stream-menu-close button-base">
-                                <i class="fas fa-times" aria-hidden="true"></i>
-                            </button>
+                            <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">External Players</h3>
                         </div>
                         <div class="stream-menu-content">
                             <div class="stream-category">
-                                <h4 class="category-heading"><i class="fas fa-mobile-screen-button" aria-hidden="true"></i> Mobile Players</h4>
-                                <div class="player-grid" role="group" aria-label="Mobile video players">
-                                    <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="vlc">
-                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/vlc.png" alt="VLC Mobile" loading="lazy" width="32" height="32" class="player-icon">
-                                        <span class="player-name">VLC Mobile</span>
+                                <h4 class="category-heading" style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.5rem;"><i class="fas fa-mobile-alt"></i> Mobile</h4>
+                                <div class="player-grid">
+                                    <button type="button" class="player-card dropdown-item" data-player-type="vlc">
+                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/vlc.png" width="32" height="32" class="player-icon">
+                                        <span class="player-name">VLC</span>
                                     </button>
-                                    <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="mxpro">
-                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/mx.png" alt="MX Player Pro" loading="lazy" width="32" height="32" class="player-icon">
-                                        <span class="player-name">MX Pro</span>
+                                    <button type="button" class="player-card dropdown-item" data-player-type="mx">
+                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/mx.png" width="32" height="32" class="player-icon">
+                                        <span class="player-name">MX</span>
                                     </button>
-                                    <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="mx">
-                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/mx.png" alt="MX Player" loading="lazy" width="32" height="32" class="player-icon">
-                                        <span class="player-name">MX Player</span>
-                                    </button>
-                                    <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="nplayer">
-                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/nPlayer.webp" alt="nPlayer" loading="lazy" width="32" height="32" class="player-icon">
-                                        <span class="player-name">nPlayer</span>
-                                    </button>
-                                     <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="splayer">
-                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/splayer.webp" alt="S Player" loading="lazy" width="32" height="32" class="player-icon">
+                                    <button type="button" class="player-card dropdown-item" data-player-type="splayer">
+                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/splayer.webp" width="32" height="32" class="player-icon">
                                         <span class="player-name">S Player</span>
-                                    </button>
-                                     <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="km">
-                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/km.webp" alt="KM Player" loading="lazy" width="32" height="32" class="player-icon">
-                                        <span class="player-name">KM Player</span>
                                     </button>
                                 </div>
                             </div>
-                            <div class="stream-category">
-                                <h4 class="category-heading"><i class="fas fa-desktop" aria-hidden="true"></i> Desktop Players</h4>
-                                <div class="player-grid" role="group" aria-label="Desktop video players">
-                                    <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="vlc-pc" title="Open in VLC Player (PC)">
-                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/vlc.png" alt="VLC Player" loading="lazy" width="32" height="32" class="player-icon">
-                                        <span class="player-name">VLC Player</span>
+                            <div class="stream-category" style="margin-top: 1rem;">
+                                <h4 class="category-heading" style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.5rem;"><i class="fas fa-desktop"></i> Desktop</h4>
+                                <div class="player-grid">
+                                    <button type="button" class="player-card dropdown-item" data-player-type="vlc-pc">
+                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/vlc.png" width="32" height="32" class="player-icon">
+                                        <span class="player-name">VLC PC</span>
                                     </button>
-                                    <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="potplayer" title="Open in PotPlayer">
-                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/pot.png" alt="PotPlayer" loading="lazy" width="32" height="32" class="player-icon">
+                                    <button type="button" class="player-card dropdown-item" data-player-type="potplayer">
+                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/pot.png" width="32" height="32" class="player-icon">
                                         <span class="player-name">PotPlayer</span>
-                                    </button>
-                                    <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="mpc" title="Open in MPC-HC">
-                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/classic.png" alt="MPC-HC" loading="lazy" width="32" height="32" class="player-icon">
-                                        <span class="player-name">MPC-HC</span>
-                                    </button>
-                                    <button type="button" class="player-card dropdown-item" role="menuitem" data-player-type="kmpc" title="Open in KM Player (PC)">
-                                        <img src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/HydroStreamerBot/km.webp" alt="KM Player" loading="lazy" width="32" height="32" class="player-icon">
-                                        <span class="player-name">KM Player</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button type="button" class="action-button button-base secondary-button" title="Download the video" aria-label="Download video file">
-                    <i class="fas fa-cloud-download-alt" aria-hidden="true"></i>
+                
+                <button type="button" class="action-button" title="Download the video">
+                    <i class="fas fa-download"></i>
                     <span>Download</span>
                 </button>
-                <button type="button" class="action-button button-base secondary-button" title="Copy video link" aria-label="Copy video link to clipboard">
-                    <i class="fas fa-copy" aria-hidden="true"></i>
+                <button type="button" class="action-button" title="Copy video link">
+                    <i class="fas fa-link"></i>
                     <span>Copy Link</span>
                 </button>
             </nav>
@@ -136,18 +306,21 @@
     </div>
 
     <footer>
-        <p><span id="thunder-text">⚡ Thunder</span> © <span id="current-year"></span> | <a href="https://github.com/fyaz05/FileToLink" target="_blank" rel="noopener noreferrer" aria-label="View source code on GitHub"><i class="fab fa-github" aria-hidden="true"></i> <span>GitHub</span></a></p>
+        <p><span id="thunder-text">⚡ Subeesh</span> © <span id="current-year">2026</span> | <a href="https://www.instagram.com/subeesh.zero" target="_blank" style="color: var(--primary); text-decoration: none;"><i class="fab fa-instagram"></i> Developed</a></p>
     </footer>
 
-    <div class="toast" id="toast" role="alert" aria-live="polite" aria-atomic="true" aria-hidden="true">
-        <div class="toast-icon" aria-hidden="true">
-            <i class="fas fa-info-circle"></i>
-        </div>
+    <div class="toast" id="toast" role="alert" style="position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: var(--primary); padding: 0.8rem 1.5rem; border-radius: 10px; display: none;">
         <div class="toast-message">Action completed.</div>
     </div>
 
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js" defer></script>
     <script src="https://cdn.jsdelivr.net/gh/fyaz05/Resources@main/FileToLink/script.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const player = new Plyr('#player');
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+    </script>
 </body>
 </html>
 
